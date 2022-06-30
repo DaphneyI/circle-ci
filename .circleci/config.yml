@@ -33,6 +33,12 @@ jobs:
       - run:
           name: "print world"
           command: "echo world"
+  print-name:
+   docker: 
+     - image: cimg/base:2021.04
+   steps:
+     - checkout
+     - run: echo $my_name
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -43,3 +49,4 @@ workflows:
       - print-world:
           requires:
             - print-hello
+      - print-name
