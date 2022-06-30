@@ -19,7 +19,7 @@ jobs:
           command: "echo Hello, World!"
   print-hello:
     docker:
-      - image: circleci/alpine
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
@@ -27,7 +27,7 @@ jobs:
           command: "echo hello"
   print-world:
     docker:
-      - image: circleci/alpine
+      - image: cimg/base:2021.04
     steps: 
       - checkout
       - run:
