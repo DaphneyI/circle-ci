@@ -62,8 +62,9 @@ jobs:
      - run: echo $my_name
   after-fail:
     docker: 
-      - image: cimg/node
+      - image: cimg/node:18.4.0
     steps:
+      - run: node --version
       - run: pip install flask
       - run:
           name: alert on failure
