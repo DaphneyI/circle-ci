@@ -60,6 +60,15 @@ jobs:
    steps:
      - checkout
      - run: echo $my_name
+  after-fail:
+    docker: 
+      - image: cimg/node
+    steps:
+      - run: pip install flask
+      - run:
+        name: alert on failure
+        command: echo "pip depends on node which does not exists in this image"
+        when: on_fail
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -75,3 +84,4 @@ workflows:
             - print-hello
       - print-name
       - use-command
+      - after-fail
