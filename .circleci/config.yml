@@ -21,6 +21,14 @@ jobs:
           root: .
           paths:
             - output.txt
+  downstream:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run: cat output.txt
   print-hello:
     docker:
       - image: cimg/base:2021.04
@@ -49,6 +57,9 @@ workflows:
   say-hello-workflow:
     jobs:
       - save-hello-world-output
+      - downstream:
+          requires:
+            - save-hello-world-output
       - print-hello
       - print-world:
           requires:
